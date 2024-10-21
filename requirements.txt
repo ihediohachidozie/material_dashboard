@@ -9,7 +9,6 @@ django-widget-tweaks==1.5.0
 gunicorn==22.0.0
 packaging==24.1
 psycopg==3.2.3
-psycopg2==2.9.10
 pycodestyle==2.12.0
 pycparser==2.22
 python-decouple==3.8
