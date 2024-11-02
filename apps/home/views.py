@@ -11,7 +11,8 @@ from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.contrib.auth import get_user_model, get_user
-from .forms import UserProfile
+from .forms import UserProfileForm
+from django.contrib import messages
 from django.shortcuts import render, redirect
 
 @login_required()
@@ -62,13 +63,12 @@ def saveProfile(request):
     Address, City, Country, Postal code,
     About Me 
     '''
-    user = get_user_model()
-    data = user.objects.get(pk=request.user.id)
-    data.first_name = request.POST["first_name"]
-    data.last_name = request.POST["last_name"]
-    data.save()
-    # messages.success(request, f'Your account has been updated!')
-    return redirect('profile') 
-    # return HttpResponse(f'I am here {request.POST["last_name"]} {request.user.id}' )
+    if request.method == 'POST':
+        u_form = UserProfileForm(request.POST, instance=request.user)
+        if u_form.is_valid():
+            u_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile') 
+    
 
     

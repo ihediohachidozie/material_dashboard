@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 
-class UserProfile(forms.Form):
+class UserProfileForm(forms.ModelForm):
   first_name = forms.CharField()
   last_name = forms.CharField()
 
